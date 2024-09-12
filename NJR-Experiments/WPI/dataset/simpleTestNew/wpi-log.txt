@@ -1,0 +1,558 @@
++ PROJECT_PATH=../dataset/simpleTestNew
++ CF_BINARY=../scripts/tools/checker-framework/checker/bin/javac
++ COMPILED_CLASSES_FOLDER=../dataset/simpleTestNew/classes
++ LIB_FOLDER=../dataset/simpleTestNew/lib
++ SRC_FILES=../dataset/simpleTestNew/cf_srcs.txt
++ CLASSPATH_DIR=../dataset/simpleTestNew/classpath
++ echo 'CF_BINARY: ../scripts/tools/checker-framework/checker/bin/javac'
+CF_BINARY: ../scripts/tools/checker-framework/checker/bin/javac
++ unzip_jars ../dataset/simpleTestNew/lib ../dataset/simpleTestNew/classpath
++ local lib_folder=../dataset/simpleTestNew/lib
++ local extract_to=../dataset/simpleTestNew/classpath
++ '[' -d ../dataset/simpleTestNew/classpath ']'
++ rm -rf ../dataset/simpleTestNew/classpath
++ mkdir -p ../dataset/simpleTestNew/classpath
++ for jar_file in '"$lib_folder"/*.jar'
++ unzip -o -q '../dataset/simpleTestNew/lib/*.jar' -d ../dataset/simpleTestNew/classpath
+unzip:  cannot find or open ../dataset/simpleTestNew/lib/*.jar, ../dataset/simpleTestNew/lib/*.jar.zip or ../dataset/simpleTestNew/lib/*.jar.ZIP.
+
+No zipfiles found.
++ true
++ find ../dataset/simpleTestNew/src -name '*.java'
++ BUILD_CMD='../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt'
++ CLEAN_CMD='rm -rf ../dataset/simpleTestNew/classes'
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:39: warning: (initialization.field.write.initialized) $$ 1 $$ this.game $$ ( 909, 918 ) $$ storing values that are possibly under initialization in the field of initialized objects is not permitted
+        this.game = game;
+            ^
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:56: warning: (initialization.field.write.initialized) $$ 1 $$ this.game $$ ( 1273, 1282 ) $$ storing values that are possibly under initialization in the field of initialized objects is not permitted
+        this.game = game;
+            ^
+4 warnings
++ WPITEMPDIR=../dataset/simpleTestNew/wpi-out
++ WPIOUTDIR=build/whole-program-inference
++ DEBUG=1
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ rm -f 'iteration*.diff'
++ WPIITERATIONOUTPUTS=../dataset/simpleTestNew/wpi-iterations
++ rm -rf ../dataset/simpleTestNew/wpi-iterations
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations
++ count=1
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 1'
+entering iteration 1
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:9: warning: (argument) $$ 4 $$ game $$ MoveValidator.setGame $$ @UnderInitialization @NonNull GameImpl $$ @Initialized @NonNull Game $$ ( 210, 214 ) $$ incompatible argument for parameter game of MoveValidator.setGame.
+        mValidator.setGame(this);
+                           ^
+  found   : @UnderInitialization @NonNull GameImpl
+  required: @Initialized @NonNull Game
+../dataset/simpleTestNew/src/Game.java:13: warning: (initialization.fields.uninitialized) $$ 1 $$ moveValidator $$ ( 264, 337 ) $$ the constructor does not initialize fields: moveValidator
+    public GameImpl( MonFactory factory) {
+           ^
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:42: warning: (initialization.fields.uninitialized) $$ 1 $$ game $$ ( 938, 983 ) $$ the constructor does not initialize fields: game
+    public PlayerDependentMoveValidator() {
+           ^
+../dataset/simpleTestNew/src/Game.java:45: warning: (initialization.fields.uninitialized) $$ 1 $$ game $$ ( 989, 1113 ) $$ the constructor does not initialize fields: game
+    public PlayerDependentMoveValidator(Game game) {
+           ^
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:59: warning: (initialization.fields.uninitialized) $$ 1 $$ game $$ ( 1302, 1338 ) $$ the constructor does not initialize fields: game
+    public SimpleMoveValidator() {
+           ^
+../dataset/simpleTestNew/src/Game.java:75: warning: (initialization.field.uninitialized) $$ 1 $$ game $$ ( 1717, 1736 ) $$ the default constructor does not initialize field game
+    private  Game game;
+                  ^
+8 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
+++ true
++ DIFF_RESULT='Only in build/whole-program-inference: Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava
+Only in build/whole-program-inference: Game-org.checkerframework.checker.nullness.NullnessChecker.ajava'
++ [[ 1 == 1 ]]
+++ realpath iteration1.diff
+realpath: iteration1.diff: No such file or directory
++ echo 'putting the diff for iteration 1 into '
+putting the diff for iteration 1 into 
++ echo Only in build/whole-program-inference: Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava Only in build/whole-program-inference: Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
++ [[ Only in build/whole-program-inference: Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava
+Only in build/whole-program-inference: Game-org.checkerframework.checker.nullness.NullnessChecker.ajava != '' ]]
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mv build/whole-program-inference ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations/iteration1
++ cp -rf ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava ../dataset/simpleTestNew/wpi-iterations/iteration1
++ echo 'ending iteration 1, time taken: 2 seconds'
+ending iteration 1, time taken: 2 seconds
++ echo
+
++ (( count++ ))
++ '[' 2 -eq 21 ']'
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 2'
+entering iteration 2
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:38: warning: (override.param) $$ 7 $$ game $$ @Initialized @NonNull Game $$ @UnknownInitialization @NonNull Game $$ @Initialized @NonNull PlayerDependentMoveValidator $$ @NonNull void setGame(@Initialized @NonNull PlayerDependentMoveValidator this, @Initialized @NonNull Game p0) $$ @Initialized @NonNull MoveValidator $$ @NonNull void setGame(@Initialized @NonNull MoveValidator this, @UnknownInitialization @NonNull Game p0) $$ ( 888, 897 ) $$ Incompatible parameter type for game.
+    public void setGame(Game game) {
+                             ^
+  found   : @Initialized @NonNull Game
+  required: @UnknownInitialization @NonNull Game
+  Consequence: method in @Initialized @NonNull PlayerDependentMoveValidator
+    @NonNull void setGame(@Initialized @NonNull PlayerDependentMoveValidator this, @Initialized @NonNull Game p0)
+  cannot override method in @Initialized @NonNull MoveValidator
+    @NonNull void setGame(@Initialized @NonNull MoveValidator this, @UnknownInitialization @NonNull Game p0)
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:55: warning: (override.param) $$ 7 $$ game $$ @Initialized @NonNull Game $$ @UnknownInitialization @NonNull Game $$ @Initialized @NonNull SimpleMoveValidator $$ @NonNull void setGame(@Initialized @NonNull SimpleMoveValidator this, @Initialized @NonNull Game p0) $$ @Initialized @NonNull MoveValidator $$ @NonNull void setGame(@Initialized @NonNull MoveValidator this, @UnknownInitialization @NonNull Game p0) $$ ( 1252, 1261 ) $$ Incompatible parameter type for game.
+    public void setGame(Game game) {
+                             ^
+  found   : @Initialized @NonNull Game
+  required: @UnknownInitialization @NonNull Game
+  Consequence: method in @Initialized @NonNull SimpleMoveValidator
+    @NonNull void setGame(@Initialized @NonNull SimpleMoveValidator this, @Initialized @NonNull Game p0)
+  cannot override method in @Initialized @NonNull MoveValidator
+    @NonNull void setGame(@Initialized @NonNull MoveValidator this, @UnknownInitialization @NonNull Game p0)
+../dataset/simpleTestNew/src/Game.java:63: warning: (argument) $$ 4 $$ game $$ PlayerDependentMoveValidator constructor $$ @Initialized @MonotonicNonNull Game $$ @Initialized @NonNull Game $$ ( 1437, 1441 ) $$ incompatible argument for parameter game of PlayerDependentMoveValidator constructor.
+        return new PlayerDependentMoveValidator(game);
+                                                ^
+  found   : @Initialized @MonotonicNonNull Game
+  required: @Initialized @NonNull Game
+5 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
+++ true
++ DIFF_RESULT='diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+42c42
+<     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game);
+---
+>     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game);
+56c56
+<     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+65c65
+<     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+80c80
+<     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {'
++ [[ 1 == 1 ]]
+++ realpath iteration2.diff
+realpath: iteration2.diff: No such file or directory
++ echo 'putting the diff for iteration 2 into '
+putting the diff for iteration 2 into 
++ echo diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava 42c42 '<' void 'setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game);' --- '>' void 'setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game);' 56c56 '<' PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' --- '>' PlayerDependentMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' 65c65 '<' public 'PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' --- '>' public 'PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{' 80c80 '<' SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' --- '>' SimpleMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{'
++ [[ diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+42c42
+<     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game);
+---
+>     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game);
+56c56
+<     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+65c65
+<     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+80c80
+<     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) { != '' ]]
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mv build/whole-program-inference ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations/iteration2
++ cp -rf ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava ../dataset/simpleTestNew/wpi-iterations/iteration2
++ echo 'ending iteration 2, time taken: 1 seconds'
+ending iteration 2, time taken: 1 seconds
++ echo
+
++ (( count++ ))
++ '[' 3 -eq 21 ']'
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 3'
+entering iteration 3
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:39: warning: (initialization.field.write.initialized) $$ 1 $$ this.game $$ ( 909, 918 ) $$ storing values that are possibly under initialization in the field of initialized objects is not permitted
+        this.game = game;
+            ^
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:46: warning: (argument) $$ 4 $$ game $$ PlayerDependentMoveValidator.setGame $$ @Initialized @Nullable Game $$ @UnknownInitialization @NonNull Game $$ ( 1059, 1063 ) $$ incompatible argument for parameter game of PlayerDependentMoveValidator.setGame.
+        this.setGame(game);
+                     ^
+  found   : @Initialized @Nullable Game
+  required: @UnknownInitialization @NonNull Game
+../dataset/simpleTestNew/src/Game.java:56: warning: (initialization.field.write.initialized) $$ 1 $$ this.game $$ ( 1273, 1282 ) $$ storing values that are possibly under initialization in the field of initialized objects is not permitted
+        this.game = game;
+            ^
+5 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
+++ true
++ DIFF_RESULT='diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+50c50
+<     private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+56c56
+<     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+76c76
+<     private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+80c80
+<     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {'
++ [[ 1 == 1 ]]
+++ realpath iteration3.diff
+realpath: iteration3.diff: No such file or directory
++ echo 'putting the diff for iteration 3 into '
+putting the diff for iteration 3 into 
++ echo diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava 50c50 '<' private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' --- '>' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' 56c56 '<' PlayerDependentMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' --- '>' PlayerDependentMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{' 76c76 '<' private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' --- '>' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' 80c80 '<' SimpleMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' --- '>' SimpleMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{'
++ [[ diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+50c50
+<     private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+56c56
+<     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+76c76
+<     private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+80c80
+<     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) { != '' ]]
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mv build/whole-program-inference ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations/iteration3
++ cp -rf ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava ../dataset/simpleTestNew/wpi-iterations/iteration3
++ echo 'ending iteration 3, time taken: 2 seconds'
+ending iteration 3, time taken: 2 seconds
++ echo
+
++ (( count++ ))
++ '[' 4 -eq 21 ']'
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 4'
+entering iteration 4
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:39: warning: (assignment) $$ 2 $$ @UnknownInitialization(GameImpl.class) @Nullable Game $$ @UnknownInitialization @MonotonicNonNull Game $$ ( 921, 925 ) $$ incompatible types in assignment.
+        this.game = game;
+                    ^
+  found   : @UnknownInitialization(GameImpl.class) @Nullable Game
+  required: @UnknownInitialization @MonotonicNonNull Game
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:47: warning: (argument) $$ 4 $$ game $$ MoveValidator.setGame $$ @Initialized @Nullable Game $$ @UnknownInitialization(GameImpl.class) @NonNull Game $$ ( 1101, 1105 ) $$ incompatible argument for parameter game of MoveValidator.setGame.
+        blackMoveValidator.setGame(game);
+                                   ^
+  found   : @Initialized @Nullable Game
+  required: @UnknownInitialization(GameImpl.class) @NonNull Game
+../dataset/simpleTestNew/src/Game.java:63: warning: (return) $$ 2 $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull MoveValidator $$ ( 1404, 1442 ) $$ incompatible types in return.
+        return new PlayerDependentMoveValidator(game);
+               ^
+  type of expression: @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  method return type: @Initialized @NonNull MoveValidator
+../dataset/simpleTestNew/src/Game.java:63: warning: (argument) $$ 4 $$ game $$ PlayerDependentMoveValidator constructor $$ @UnknownInitialization @MonotonicNonNull Game $$ @Initialized @Nullable Game $$ ( 1437, 1441 ) $$ incompatible argument for parameter game of PlayerDependentMoveValidator constructor.
+        return new PlayerDependentMoveValidator(game);
+                                                ^
+  found   : @UnknownInitialization @MonotonicNonNull Game
+  required: @Initialized @Nullable Game
+6 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
+++ true
++ DIFF_RESULT='diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+42c42
+<     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game);
+---
+>     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game);
+50c50
+<     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game;
+65c65
+<     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+---
+>     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+76c76
+<     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+89c89
+<     public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull MoveValidator createMoveValidator() {
+---
+>     public @org.checkerframework.checker.initialization.qual.UnderInitialization(PlayerDependentMoveValidator.class) @org.checkerframework.checker.nullness.qual.NonNull MoveValidator createMoveValidator() {'
++ [[ 1 == 1 ]]
+++ realpath iteration4.diff
+realpath: iteration4.diff: No such file or directory
++ echo 'putting the diff for iteration 4 into '
+putting the diff for iteration 4 into 
++ echo diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava 42c42 '<' void 'setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game);' --- '>' void 'setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game);' 50c50 '<' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' --- '>' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game;' 65c65 '<' public 'PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{' --- '>' public 'PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{' 76c76 '<' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' --- '>' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' 89c89 '<' public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull MoveValidator 'createMoveValidator()' '{' --- '>' public '@org.checkerframework.checker.initialization.qual.UnderInitialization(PlayerDependentMoveValidator.class)' @org.checkerframework.checker.nullness.qual.NonNull MoveValidator 'createMoveValidator()' '{'
++ [[ diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+42c42
+<     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game);
+---
+>     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game);
+50c50
+<     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game;
+65c65
+<     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+---
+>     public PlayerDependentMoveValidator(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+76c76
+<     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+89c89
+<     public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull MoveValidator createMoveValidator() {
+---
+>     public @org.checkerframework.checker.initialization.qual.UnderInitialization(PlayerDependentMoveValidator.class) @org.checkerframework.checker.nullness.qual.NonNull MoveValidator createMoveValidator() { != '' ]]
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mv build/whole-program-inference ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations/iteration4
++ cp -rf ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava ../dataset/simpleTestNew/wpi-iterations/iteration4
++ echo 'ending iteration 4, time taken: 1 seconds'
+ending iteration 4, time taken: 1 seconds
++ echo
+
++ (( count++ ))
++ '[' 5 -eq 21 ']'
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 5'
+entering iteration 5
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:46: warning: (argument) $$ 4 $$ game $$ PlayerDependentMoveValidator.setGame $$ @UnknownInitialization @Nullable Game $$ @UnknownInitialization(GameImpl.class) @Nullable Game $$ ( 1059, 1063 ) $$ incompatible argument for parameter game of PlayerDependentMoveValidator.setGame.
+        this.setGame(game);
+                     ^
+  found   : @UnknownInitialization @Nullable Game
+  required: @UnknownInitialization(GameImpl.class) @Nullable Game
+../dataset/simpleTestNew/src/Game.java:47: warning: (argument) $$ 4 $$ game $$ MoveValidator.setGame $$ @UnknownInitialization @Nullable Game $$ @UnknownInitialization(GameImpl.class) @Nullable Game $$ ( 1101, 1105 ) $$ incompatible argument for parameter game of MoveValidator.setGame.
+        blackMoveValidator.setGame(game);
+                                   ^
+  found   : @UnknownInitialization @Nullable Game
+  required: @UnknownInitialization(GameImpl.class) @Nullable Game
+../dataset/simpleTestNew/src/Game.java:55: warning: (override.param) $$ 7 $$ game $$ @UnknownInitialization(GameImpl.class) @NonNull Game $$ @UnknownInitialization(GameImpl.class) @Nullable Game $$ @Initialized @NonNull SimpleMoveValidator $$ @NonNull void setGame(@Initialized @NonNull SimpleMoveValidator this, @UnknownInitialization(GameImpl.class) @NonNull Game p0) $$ @Initialized @NonNull MoveValidator $$ @NonNull void setGame(@Initialized @NonNull MoveValidator this, @UnknownInitialization(GameImpl.class) @Nullable Game p0) $$ ( 1252, 1261 ) $$ Incompatible parameter type for game.
+    public void setGame(Game game) {
+                             ^
+  found   : @UnknownInitialization(GameImpl.class) @NonNull Game
+  required: @UnknownInitialization(GameImpl.class) @Nullable Game
+  Consequence: method in @Initialized @NonNull SimpleMoveValidator
+    @NonNull void setGame(@Initialized @NonNull SimpleMoveValidator this, @UnknownInitialization(GameImpl.class) @NonNull Game p0)
+  cannot override method in @Initialized @NonNull MoveValidator
+    @NonNull void setGame(@Initialized @NonNull MoveValidator this, @UnknownInitialization(GameImpl.class) @Nullable Game p0)
+5 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
+++ true
++ DIFF_RESULT='diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+42c42
+<     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game);
+---
+>     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game);
+56c56
+<     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+---
+>     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+80c80
+<     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {'
++ [[ 1 == 1 ]]
+++ realpath iteration5.diff
+realpath: iteration5.diff: No such file or directory
++ echo 'putting the diff for iteration 5 into '
+putting the diff for iteration 5 into 
++ echo diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava 42c42 '<' void 'setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game);' --- '>' void 'setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game);' 56c56 '<' PlayerDependentMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{' --- '>' PlayerDependentMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{' 80c80 '<' SimpleMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.NonNull Game 'game)' '{' --- '>' SimpleMoveValidator this, '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game)' '{'
++ [[ diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+42c42
+<     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game);
+---
+>     void setGame(@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game);
+56c56
+<     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+---
+>     PlayerDependentMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) {
+80c80
+<     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.NonNull Game game) {
+---
+>     SimpleMoveValidator this, @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game) { != '' ]]
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mv build/whole-program-inference ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations/iteration5
++ cp -rf ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava ../dataset/simpleTestNew/wpi-iterations/iteration5
++ echo 'ending iteration 5, time taken: 2 seconds'
+ending iteration 5, time taken: 2 seconds
++ echo
+
++ (( count++ ))
++ '[' 6 -eq 21 ']'
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 6'
+entering iteration 6
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+../dataset/simpleTestNew/src/Game.java:56: warning: (assignment) $$ 2 $$ @UnknownInitialization @Nullable Game $$ @UnknownInitialization(GameImpl.class) @MonotonicNonNull Game $$ ( 1285, 1289 ) $$ incompatible types in assignment.
+        this.game = game;
+                    ^
+  found   : @UnknownInitialization @Nullable Game
+  required: @UnknownInitialization(GameImpl.class) @MonotonicNonNull Game
+3 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
+++ true
++ DIFF_RESULT='diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+76c76
+<     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game;'
++ [[ 1 == 1 ]]
+++ realpath iteration6.diff
+realpath: iteration6.diff: No such file or directory
++ echo 'putting the diff for iteration 6 into '
+putting the diff for iteration 6 into 
++ echo diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava 76c76 '<' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class)' @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game 'game;' --- '>' private '@org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class)' @org.checkerframework.checker.nullness.qual.Nullable Game 'game;'
++ [[ diff -r ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava build/whole-program-inference/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava
+76c76
+<     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(GameImpl.class) @org.checkerframework.checker.nullness.qual.MonotonicNonNull Game game;
+---
+>     private @org.checkerframework.checker.initialization.qual.UnknownInitialization(java.lang.Object.class) @org.checkerframework.checker.nullness.qual.Nullable Game game; != '' ]]
++ rm -rf ../dataset/simpleTestNew/wpi-out
++ mv build/whole-program-inference ../dataset/simpleTestNew/wpi-out
++ mkdir -p ../dataset/simpleTestNew/wpi-iterations/iteration6
++ cp -rf ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.KeyForSubchecker.ajava ../dataset/simpleTestNew/wpi-out/Game-org.checkerframework.checker.nullness.NullnessChecker.ajava ../dataset/simpleTestNew/wpi-iterations/iteration6
++ echo 'ending iteration 6, time taken: 1 seconds'
+ending iteration 6, time taken: 1 seconds
++ echo
+
++ (( count++ ))
++ '[' 7 -eq 21 ']'
++ :
++ [[ 1 == 1 ]]
++ SECONDS=0
++ echo 'entering iteration 7'
+entering iteration 7
++ ../scripts/tools/checker-framework/checker/bin/javac -processor org.checkerframework.checker.nullness.NullnessChecker -AassumePure -Adetailedmsgtext -Aajava=../dataset/simpleTestNew/wpi-out -Ainfer=ajava -Awarns -AshowPrefixInWarningMessages -J-Xmx32G -Xmaxerrs 10000 -g -d ../dataset/simpleTestNew/classes -cp ../dataset/simpleTestNew/classpath @../dataset/simpleTestNew/cf_srcs.txt
+../dataset/simpleTestNew/src/Game.java:14: warning: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:46: warning: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+2 warnings
++ rm -rf ../dataset/simpleTestNew/classes
++ mkdir -p ../dataset/simpleTestNew/wpi-out
++ mkdir -p build/whole-program-inference
+++ diff -r ../dataset/simpleTestNew/wpi-out build/whole-program-inference
++ DIFF_RESULT=
++ [[ 1 == 1 ]]
+++ realpath iteration7.diff
+realpath: iteration7.diff: No such file or directory
++ echo 'putting the diff for iteration 7 into '
+putting the diff for iteration 7 into 
++ echo
++ [[ '' != '' ]]
++ break
++ rm -rf ../dataset/simpleTestNew/wpi-iterations

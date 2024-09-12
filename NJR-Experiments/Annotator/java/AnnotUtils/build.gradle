@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id "net.ltgt.errorprone" version "2.0.1" apply false
+    id "com.vanniktech.maven.publish" version "0.25.3" apply false
+}
+
+// make source and target Java 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+apply from: "gradle/dependencies.gradle"

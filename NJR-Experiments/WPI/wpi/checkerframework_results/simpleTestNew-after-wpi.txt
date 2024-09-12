@@ -1,0 +1,11 @@
+../dataset/simpleTestNew/src/Game.java:14: error: (method.invocation) $$ 3 $$ setFactory(MonFactory) $$ @UnderInitialization(GameImpl.class) @NonNull GameImpl $$ @Initialized @NonNull GameImpl $$ ( 311, 330 ) $$ call to setFactory(MonFactory) not allowed on the given receiver.
+        setFactory(factory);
+                  ^
+  found   : @UnderInitialization(GameImpl.class) @NonNull GameImpl
+  required: @Initialized @NonNull GameImpl
+../dataset/simpleTestNew/src/Game.java:46: error: (method.invocation) $$ 3 $$ setGame(Game) $$ @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator $$ @Initialized @NonNull PlayerDependentMoveValidator $$ ( 1046, 1064 ) $$ call to setGame(Game) not allowed on the given receiver.
+        this.setGame(game);
+                    ^
+  found   : @UnderInitialization(PlayerDependentMoveValidator.class) @NonNull PlayerDependentMoveValidator
+  required: @Initialized @NonNull PlayerDependentMoveValidator
+2 errors
