@@ -2,7 +2,7 @@
 
 This repository contains several files used for Bias Illustration study:
 
-- **Results.xlsx**: Contains all results related to Section 3 of the paper.
+- **bias-results.xlsx**: Contains all results related to Section 3 of the paper.
   
 - **Pre-And-Post-Commits-Decisions.docx**: Includes logs of author decisions and communication regarding the selection of pre and post-check versions for the benchmarks.
   
